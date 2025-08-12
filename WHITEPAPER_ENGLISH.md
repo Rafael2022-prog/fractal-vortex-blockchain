@@ -4,7 +4,7 @@
 
 **Version:** 1.0  
 **Date:** January 2025  
-**Team:** FVC Core Development Team  
+**Created:** Emylton Leunufna  
 **License:** MIT  
 
 ---
@@ -348,10 +348,10 @@ FVC is not just a new blockchain, but a new paradigm for decentralized infrastru
 
 ---
 
-**Contact:**
-- Website: https://fractalvortex.org
-- GitHub: https://github.com/fractalvortex/fvc-protocol
-- Email: team@fractalvortex.org
-- Telegram: @FractalVortexChain
+**Kontak:**
+- Website: https://fvchain.xyz
+- GitHub: https://github.com/Rafael2022-progfractal-vortex-blockchain
+- Email: team@fvchain.xyz
+- Telegram: @fvchain
 
 **Disclaimer:** This document is a technical whitepaper for informational purposes. Cryptocurrency investments carry high risks.
