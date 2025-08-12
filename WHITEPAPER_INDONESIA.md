@@ -4,7 +4,7 @@
 
 **Versi:** 1.0  
 **Tanggal:** Januari 2025  
-**Tim:** FVC Core Development Team  
+**Cr:** Emylton Leunufna  
 **Lisensi:** MIT  
 
 ---
@@ -349,9 +349,9 @@ FVC bukan hanya blockchain baru, tetapi paradigma baru untuk infrastruktur terde
 ---
 
 **Kontak:**
-- Website: https://fractalvortex.org
-- GitHub: https://github.com/fractalvortex/fvc-protocol
-- Email: team@fractalvortex.org
-- Telegram: @FractalVortexChain
+- Website: https://fvchain.xyz
+- GitHub: https://github.com/Rafael2022-progfractal-vortex-blockchain
+- Email: team@fvchain.xyz
+- Telegram: @fvchain
 
 **Disclaimer:** Dokumen ini adalah whitepaper teknis untuk tujuan informasi. Investasi dalam cryptocurrency memiliki risiko tinggi.

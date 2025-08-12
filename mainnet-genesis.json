@@ -1,0 +1,57 @@
+{
+  "name": "mainnet-genesis",
+  "chain_id": "fractal-vortex-mainnet",
+  "initial_supply": 21000000000000000000000000,
+  "validators": [
+    {
+      "id": "validator-mainnet-00",
+      "address": "0x1000000000000000000000000000000000000000",
+      "stake": 5250000000000000000000000,
+      "fractal_energy": 1.618
+    },
+    {
+      "id": "validator-mainnet-01",
+      "address": "0x1000000000000000000000000000000000000001",
+      "stake": 5250000000000000000000000,
+      "fractal_energy": 1.7180000000000002
+    },
+    {
+      "id": "validator-mainnet-02",
+      "address": "0x1000000000000000000000000000000000000002",
+      "stake": 5250000000000000000000000,
+      "fractal_energy": 1.818
+    },
+    {
+      "id": "validator-mainnet-03",
+      "address": "0x1000000000000000000000000000000000000003",
+      "stake": 5250000000000000000000000,
+      "fractal_energy": 1.9180000000000001
+    }
+  ],
+  "genesis_time": 1735045200,
+  "fractal_parameters": {
+    "energy_threshold": 2.0,
+    "fractal_levels": 5,
+    "vortex_sequence": [
+      1,
+      2,
+      4,
+      8,
+      7,
+      5
+    ],
+    "golden_ratio": 1.618033988749895,
+    "difficulty_adjustment": 2016,
+    "block_time_target": 600,
+    "max_block_size": 8388608,
+    "halving_interval": 210000
+  },
+  "network_config": {
+    "p2p_port": 8333,
+    "rpc_port": 8332,
+    "max_peers": 125,
+    "seed_nodes": [
+      "103.245.38.44:8333"
+    ]
+  }
+}
