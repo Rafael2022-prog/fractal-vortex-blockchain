@@ -1,0 +1,45 @@
+{
+  "name": "testnet-genesis",
+  "chain_id": "fractal-vortex-testnet-genesis",
+  "initial_supply": 1000000000,
+  "validators": [
+    {
+      "id": "validator-00",
+      "address": "0x0000000000000000000000000000000000000000",
+      "stake": 250000000,
+      "fractal_energy": 1.618
+    },
+    {
+      "id": "validator-01",
+      "address": "0x0000000000000000000000000000000000000001",
+      "stake": 250000000,
+      "fractal_energy": 1.7180000000000002
+    },
+    {
+      "id": "validator-02",
+      "address": "0x0000000000000000000000000000000000000002",
+      "stake": 250000000,
+      "fractal_energy": 1.818
+    },
+    {
+      "id": "validator-03",
+      "address": "0x0000000000000000000000000000000000000003",
+      "stake": 250000000,
+      "fractal_energy": 1.9180000000000001
+    }
+  ],
+  "genesis_time": 1754861767,
+  "fractal_parameters": {
+    "energy_threshold": 1.0,
+    "fractal_levels": 3,
+    "vortex_sequence": [
+      1,
+      2,
+      4,
+      8,
+      7,
+      5
+    ],
+    "golden_ratio": 1.618033988749895
+  }
+}

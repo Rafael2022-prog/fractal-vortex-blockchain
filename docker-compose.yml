@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  fractal-node-1:
+    build: .
+    ports:
+      - "30333:30333"
+      - "9933:9933"
+      - "9944:9944"
+    environment:
+      - RUST_LOG=info
+      - NODE_NAME=fractal-node-1
+      - LISTEN_ADDR=/ip4/0.0.0.0/tcp/30333
+      - BOOTSTRAP_NODES=/ip4/fractal-node-2/tcp/30333
+    volumes:
+      - fractal-data-1:/data
+    networks:
+      - fractal-network
+
+  fractal-node-2:
+    build: .
+    ports:
+      - "30334:30333"
+      - "9934:9933"
+      - "9945:9944"
+    environment:
+      - RUST_LOG=info
+      - NODE_NAME=fractal-node-2
+      - LISTEN_ADDR=/ip4/0.0.0.0/tcp/30333
+      - BOOTSTRAP_NODES=/ip4/fractal-node-1/tcp/30333
+    volumes:
+      - fractal-data-2:/data
+    networks:
+      - fractal-network
+
+  fractal-node-3:
+    build: .
+    ports:
+      - "30335:30333"
+      - "9935:9933"
+      - "9946:9944"
+    environment:
+      - RUST_LOG=info
+      - NODE_NAME=fractal-node-3
+      - LISTEN_ADDR=/ip4/0.0.0.0/tcp/30333
+      - BOOTSTRAP_NODES=/ip4/fractal-node-1/tcp/30333,/ip4/fractal-node-2/tcp/30333
+    volumes:
+      - fractal-data-3:/data
+    networks:
+      - fractal-network
+
+  fractal-node-4:
+    build: .
+    ports:
+      - "30336:30333"
+      - "9936:9933"
+      - "9947:9944"
+    environment:
+      - RUST_LOG=info
+      - NODE_NAME=fractal-node-4
+      - LISTEN_ADDR=/ip4/0.0.0.0/tcp/30333
+      - BOOTSTRAP_NODES=/ip4/fractal-node-1/tcp/30333,/ip4/fractal-node-2/tcp/30333,/ip4/fractal-node-3/tcp/30333
+    volumes:
+      - fractal-data-4:/data
+    networks:
+      - fractal-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - fractal-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=fractal123
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - fractal-network
+
+volumes:
+  fractal-data-1:
+  fractal-data-2:
+  fractal-data-3:
+  fractal-data-4:
+  grafana-data:
+
+networks:
+  fractal-network:
+    driver: bridge

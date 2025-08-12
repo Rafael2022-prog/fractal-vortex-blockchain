@@ -1,0 +1,97 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.test
+
+# Private keys and certificates
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Sensitive configuration
+config/secrets.toml
+config/private.toml
+*.secret
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node.js (for dashboard)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+build/
+dist/
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Test artifacts
+test-results/
+
+# Backup files
+*.bak
+*.backup
+
+# Local development
+.local/
+
+# Mining data
+mining_data/
+blockchain_data/
+
+# Wallet files
+wallet.dat
+keystore/
+
+# Network configuration
+network_config.toml
+peer_list.txt
+
+# Database and ledger files
+ledger/
+*.ldb
+*.sst
+MANIFEST-*
+LOCK
+CURRENT
+LOG
+*.log.*
