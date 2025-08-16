@@ -1,45 +1,32 @@
 {
-  "name": "testnet-genesis",
-  "chain_id": "fractal-vortex-testnet-genesis",
-  "initial_supply": 1000000000,
+  "name": "fvchain-mainnet",
+  "chain_id": "369",
+  "initial_supply": 3600900000000000000,
   "validators": [
     {
-      "id": "validator-00",
-      "address": "0x0000000000000000000000000000000000000000",
-      "stake": 250000000,
+      "id": "validator-mainnet-00",
+      "address": "fvca65abb1219e9ac3548947be65eae19843f3faa40",
+      "stake": 9000000000000000,
       "fractal_energy": 1.618
     },
     {
-      "id": "validator-01",
-      "address": "0x0000000000000000000000000000000000000001",
-      "stake": 250000000,
-      "fractal_energy": 1.7180000000000002
+      "id": "validator-mainnet-01",
+      "address": "fvc041f666a316648dec225badc5c5993b53ac3f2fd",
+      "stake": 8000000000000000,
+      "fractal_energy": 1.718
     },
     {
-      "id": "validator-02",
-      "address": "0x0000000000000000000000000000000000000002",
-      "stake": 250000000,
-      "fractal_energy": 1.818
-    },
-    {
-      "id": "validator-03",
-      "address": "0x0000000000000000000000000000000000000003",
-      "stake": 250000000,
-      "fractal_energy": 1.9180000000000001
+      "id": "validator-mainnet-02",
+      "address": "fvccf6bbe570677e98248030a6289957d5a88a551dc",
+      "stake": 3583900000000000000,
+      "fractal_energy": 1.828
     }
   ],
-  "genesis_time": 1754861767,
+  "genesis_time": 1736888400,
   "fractal_parameters": {
-    "energy_threshold": 1.0,
-    "fractal_levels": 3,
-    "vortex_sequence": [
-      1,
-      2,
-      4,
-      8,
-      7,
-      5
-    ],
-    "golden_ratio": 1.618033988749895
+    "energy_threshold": 1.618,
+    "fractal_levels": 8,
+    "vortex_sequence": [3, 6, 9, 1, 2, 7],
+    "golden_ratio": 1.6180339887
   }
 }

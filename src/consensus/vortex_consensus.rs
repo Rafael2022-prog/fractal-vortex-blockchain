@@ -1,10 +1,10 @@
-use std::collections::{HashMap, HashSet, BTreeMap};
+use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use serde::{Serialize, Deserialize};
 use libp2p::PeerId;
-use crate::crypto::fractal_hash::{FractalHasher, VortexHash, BlockHash};
-use crate::network::torus_topology::{TorusNetwork, VortexRoutingTable};
+use crate::crypto::fractal_hash::FractalHasher;
+use crate::network::torus_topology::TorusNetwork;
 
 /// Vortex consensus state machine
 pub struct VortexConsensus {
@@ -13,26 +13,27 @@ pub struct VortexConsensus {
     /// Network topology
     topology: Arc<RwLock<TorusNetwork>>,
     /// Fractal hasher for block validation
+    #[allow(dead_code)]
     hasher: FractalHasher,
     /// Vortex energy threshold for validator selection
     energy_threshold: f64,
 }
 
 /// Consensus state
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct ConsensusState {
     /// Current epoch number
-    epoch: u64,
+    pub epoch: u64,
     /// Validator set based on vortex energy
-    validators: HashMap<PeerId, f64>,
+    pub validators: HashMap<PeerId, f64>,
     /// Block DAG structure
-    block_dag: BlockDAG,
+    pub block_dag: BlockDAG,
     /// Finalized blocks
-    finalized_blocks: HashSet<[u8; 32]>,
+    pub finalized_blocks: HashSet<[u8; 32]>,
     /// Pending transactions
-    pending_txs: Vec<Transaction>,
+    pub pending_txs: Vec<Transaction>,
     /// Vortex energy distribution
-    energy_distribution: HashMap<PeerId, f64>,
+    pub energy_distribution: HashMap<PeerId, f64>,
 }
 
 /// Block DAG for fractal consensus
@@ -55,6 +56,7 @@ pub struct VortexBlock {
     pub parent_hashes: Vec<[u8; 32]>,
     pub transactions: Vec<Transaction>,
     pub timestamp: u64,
+    #[serde(with = "peer_id_serde")]
     pub validator_id: PeerId,
     pub vortex_energy: f64,
     pub fractal_level: u32,
@@ -86,6 +88,7 @@ pub enum ConsensusMessage {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Vote {
     pub block_hash: [u8; 32],
+    #[serde(with = "peer_id_serde")]
     pub voter_id: PeerId,
     pub vortex_energy: f64,
     pub signature: Vec<u8>,
@@ -94,17 +97,38 @@ pub struct Vote {
 /// Sync request
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SyncRequest {
-    pub from_hash: [u8; 32],
-    pub target_hash: [u8; 32],
-    pub requester_id: PeerId,
+    pub start_height: u64,
+    pub end_height: u64,
 }
 
 /// Energy update
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EnergyUpdate {
+    #[serde(with = "peer_id_serde")]
     pub peer_id: PeerId,
     pub new_energy: f64,
     pub signature: Vec<u8>,
+}
+
+/// Custom serialization for PeerId
+mod peer_id_serde {
+    use serde::{Deserialize, Deserializer, Serialize, Serializer};
+    use libp2p::PeerId;
+
+    pub fn serialize<S>(peer_id: &PeerId, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        peer_id.to_string().serialize(serializer)
+    }
+
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<PeerId, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        s.parse().map_err(serde::de::Error::custom)
+    }
 }
 
 impl VortexConsensus {
@@ -168,7 +192,7 @@ impl VortexConsensus {
         let state = self.state.read().await;
         let topology = self.topology.read().await;
         
-        let routing = topology.generate_vortex_routing();
+        let _routing = topology.generate_vortex_routing();
         let mut candidates: Vec<(PeerId, f64)> = Vec::new();
 
         for (peer_id, &energy) in &state.energy_distribution {
@@ -256,7 +280,7 @@ impl VortexConsensus {
         }
         
         data.extend_from_slice(&block.timestamp.to_le_bytes());
-        data.extend_from_slice(block.validator_id.as_ref());
+        data.extend_from_slice(&block.validator_id.to_bytes());
         data.extend_from_slice(&block.vortex_energy.to_le_bytes());
         data.extend_from_slice(&block.nonce.to_le_bytes());
         data.extend_from_slice(&block.difficulty.to_le_bytes());
@@ -272,7 +296,7 @@ impl VortexConsensus {
         
         // Generate fractal proof based on Sierpinski triangle
         for i in 0..3 {
-            let mut data = vec![i];
+            let data = vec![i];
             let hash = hasher.fractal_hash(&data).fractal_hash;
             proof.push(hash);
         }
@@ -345,7 +369,7 @@ impl VortexConsensus {
     fn sign_vote(&self, block_hash: &[u8; 32], voter_id: &PeerId) -> Vec<u8> {
         let mut signature = Vec::new();
         signature.extend_from_slice(block_hash);
-        signature.extend_from_slice(voter_id.as_ref());
+        signature.extend_from_slice(&voter_id.to_bytes());
         signature
     }
 
@@ -356,10 +380,12 @@ impl VortexConsensus {
         let mut finalized = Vec::new();
         
         // Use fractal finality rule
-        for (block_hash, block) in &state.block_dag.blocks {
-            if self.should_finalize(&state, block_hash) {
-                state.finalized_blocks.insert(*block_hash);
-                finalized.push(*block_hash);
+        let block_hashes: Vec<[u8; 32]> = state.block_dag.blocks.keys().cloned().collect();
+        
+        for block_hash in block_hashes {
+            if self.should_finalize(&state, &block_hash) {
+                state.finalized_blocks.insert(block_hash);
+                finalized.push(block_hash);
             }
         }
 
@@ -367,7 +393,7 @@ impl VortexConsensus {
     }
 
     /// Check if block should be finalized
-    fn should_finalize(&self, state: &ConsensusState, block_hash: &[u8; 32]) -> bool {
+    fn should_finalize(&self, state: &ConsensusState, _block_hash: &[u8; 32]) -> bool {
         // Fractal finality: 2/3 of validators must have voted
         let validator_count = state.validators.len();
         let required_votes = (validator_count * 2 + 2) / 3;
@@ -401,10 +427,42 @@ impl VortexConsensus {
             finalized_blocks: state.finalized_blocks.len() as u64,
             validator_count: state.validators.len() as u64,
             avg_vortex_energy: state.energy_distribution.values().sum::<f64>() / state.energy_distribution.len() as f64,
-            network_diameter: topology.diameter,
+            network_diameter: topology.get_diameter(),
         };
 
         Ok(stats)
+    }
+
+    /// Add transaction to pending pool
+    pub async fn add_transaction(&mut self, transaction: Transaction) -> Result<(), ConsensusError> {
+        let mut state = self.state.write().await;
+        state.pending_txs.push(transaction);
+        Ok(())
+    }
+
+    /// Process vote from validator
+    pub async fn process_vote(&mut self, _vote: Vote) -> Result<(), ConsensusError> {
+        // Placeholder for vote processing logic
+        // In a full implementation, this would:
+        // 1. Verify vote signature
+        // 2. Check voter eligibility
+        // 3. Update vote counts for the block
+        // 4. Check if block can be finalized
+        Ok(())
+    }
+
+    /// Add block to consensus
+    pub async fn add_block(&mut self, block: VortexBlock) -> Result<(), ConsensusError> {
+        let mut state = self.state.write().await;
+        state.block_dag.add_block(block);
+        Ok(())
+    }
+
+    /// Update network state
+    pub async fn update_network_state(&mut self) -> Result<(), ConsensusError> {
+        let mut topology = self.topology.write().await;
+        topology.update_network_state().await.map_err(|_| ConsensusError::NetworkError)?;
+        Ok(())
     }
 
     /// Get current timestamp

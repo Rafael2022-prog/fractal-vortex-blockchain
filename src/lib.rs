@@ -118,6 +118,18 @@ pub mod storage;
 /// Security framework
 pub mod security;
 
+/// Shared utilities and common types
+pub mod shared;
+
+/// Node implementation for fractal-vortex blockchain
+pub mod node;
+
+/// Consensus algorithms for fractal-vortex blockchain
+pub mod consensus;
+
+/// Network topology and routing
+pub mod network;
+
 /// Version information
 pub const VERSION: &str = "1.0.0";
 pub const CHAIN_ID: &str = "fractal-vortex-mainnet";

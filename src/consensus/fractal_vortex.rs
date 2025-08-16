@@ -1,15 +1,16 @@
 use std::collections::HashMap;
 use sha3::{Sha3_256, Digest};
-use num_complex::Complex;
-use rug::{Integer, integer::Order};
+
 
 /// Core fractal-vortex consensus algorithm
 pub struct FractalVortexConsensus {
     /// Current fractal dimension
+    #[allow(dead_code)]
     fractal_dimension: f64,
     /// Vortex pattern sequence (1-2-4-8-7-5)
     vortex_pattern: [u8; 6],
     /// Network topology state
+    #[allow(dead_code)]
     topology_state: FractalTopology,
 }
 
@@ -17,10 +18,12 @@ pub struct FractalVortexConsensus {
 #[derive(Debug, Clone)]
 pub struct FractalTopology {
     /// Current iteration level
+    #[allow(dead_code)]
     iteration: u32,
     /// Node connections following Sierpinski triangle
     connections: HashMap<u64, Vec<u64>>,
     /// Toroidal coordinates
+    #[allow(dead_code)]
     torus_coords: HashMap<u64, (f64, f64, f64)>,
 }
 
@@ -30,6 +33,7 @@ pub struct VortexMath {
     /// Base pattern following 1-2-4-8-7-5 sequence
     base_pattern: [u8; 6],
     /// Current position in vortex cycle
+    #[allow(dead_code)]
     cycle_position: usize,
     /// Energy accumulator
     energy_field: f64,
@@ -62,7 +66,6 @@ impl FractalVortexConsensus {
 
     /// Generate vortex-based validation score
     pub fn vortex_score(&self, block_hash: &[u8; 32]) -> f64 {
-        let mut score = 0.0;
         let mut cycle_sum = 0u32;
         
         for &byte in block_hash.iter() {
@@ -73,7 +76,7 @@ impl FractalVortexConsensus {
         }
         
         // Map to vortex pattern
-        score = (cycle_sum as f64 / 256.0) * 6.0;
+        let score = (cycle_sum as f64 / 256.0) * 6.0;
         score.fract()
     }
 

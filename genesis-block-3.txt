@@ -1,9 +1,0 @@
-🧬 GENESIS BLOCK
-================
-Chain ID: fractal-vortex-testnet-genesis
-Genesis Time: 1754861767
-Initial Supply: 1000000000
-Validators: 4
-Fractal Energy: 1
-Golden Ratio: 1.618033988749895
-Vortex Sequence: [1, 2, 4, 8, 7, 5]

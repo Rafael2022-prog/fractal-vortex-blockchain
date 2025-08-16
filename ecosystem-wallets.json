@@ -1,0 +1,174 @@
+{
+  "ecosystem_wallets": {
+    "mainnet": {
+      "network": "FVChain Mainnet",
+      "chainId": 369,
+      "created": "2025-01-12T23:45:00Z"
+    },
+    "wallets": {
+      "owner": {
+        "name": "Owner Wallet",
+        "address": "0x1111111111111111111111111111111111111111",
+        "privateKey": "PLACEHOLDER_PRIVATE_KEY_OWNER",
+        "publicKey": "PLACEHOLDER_PUBLIC_KEY_OWNER",
+        "allocation": {
+          "amount": "9000000000000000000000000",
+          "amount_readable": "9,000,000 FVC",
+          "percentage": "0.25%",
+          "wei_amount": "9000000000000000000000000"
+        },
+        "purpose": "Network governance, initial operations, and strategic partnerships",
+        "permissions": [
+          "governance_voting",
+          "network_upgrades",
+          "validator_management",
+          "emergency_actions"
+        ],
+        "security": {
+          "multisig": true,
+          "required_signatures": 3,
+          "backup_keys": 5,
+          "cold_storage": true
+        }
+      },
+      "developer": {
+        "name": "Developer Fund Wallet",
+        "address": "0x2222222222222222222222222222222222222222",
+        "privateKey": "PLACEHOLDER_PRIVATE_KEY_DEVELOPER",
+        "publicKey": "PLACEHOLDER_PUBLIC_KEY_DEVELOPER",
+        "allocation": {
+          "amount": "8000000000000000000000000",
+          "amount_readable": "8,000,000 FVC",
+          "percentage": "0.22%",
+          "wei_amount": "8000000000000000000000000"
+        },
+        "purpose": "Development funding, ecosystem growth, developer incentives, and technical improvements",
+        "permissions": [
+          "development_funding",
+          "ecosystem_grants",
+          "technical_upgrades",
+          "developer_rewards"
+        ],
+        "security": {
+          "multisig": true,
+          "required_signatures": 2,
+          "backup_keys": 3,
+          "cold_storage": true
+        },
+        "vesting": {
+          "enabled": true,
+          "schedule": "Linear release over 4 years",
+          "cliff_period": "6 months",
+          "monthly_release": "166,666.67 FVC"
+        }
+      },
+      "transaction_fee_pool": {
+        "name": "Genesis FVC",
+        "address": "0x3333333333333333333333333333333333333333",
+        "privateKey": "PLACEHOLDER_PRIVATE_KEY_TRANSACTION_FEE_POOL",
+        "publicKey": "PLACEHOLDER_PUBLIC_KEY_TRANSACTION_FEE_POOL",
+        "allocation": {
+          "amount": "3225510000000000000000000000",
+          "amount_readable": "3,225,510,000 FVC",
+          "percentage": "89.58%",
+          "wei_amount": "3225510000000000000000000000"
+        },
+        "purpose": "Menampung biaya transaksi dari user (transfer FVC, smart contract execution, dan operasi blockchain lainnya), kemudian mendistribusikan ke miners dan validators",
+        "permissions": [
+          "collect_transaction_fees",
+          "distribute_collected_fees",
+          "miner_rewards_distribution",
+          "validator_rewards_distribution"
+        ],
+        "security": {
+          "multisig": false,
+          "automated_collection": true,
+          "automated_distribution": true,
+          "smart_contract_controlled": true,
+          "audit_trail": true,
+          "real_time_monitoring": true
+        },
+        "fee_collection_rules": {
+          "transaction_fee_rate": "0.001 FVC per transaction",
+          "smart_contract_gas_fee": "dynamic based on complexity",
+          "transfer_fee": "0.0005 FVC per transfer",
+          "collection_method": "automatic_per_transaction"
+        },
+        "distribution_rules": {
+          "miner_share": "70%",
+          "validator_share": "20%",
+          "network_maintenance_transfer": "10% transferred to Network Maintenance Fund",
+          "distribution_frequency": "per_block",
+          "minimum_distribution_threshold": "1000 FVC"
+        }
+      },
+      "network_maintenance_fund": {
+        "name": "Network Maintenance Fund",
+        "address": "0x4444444444444444444444444444444444444444",
+        "privateKey": "PLACEHOLDER_PRIVATE_KEY_NETWORK_MAINTENANCE",
+        "publicKey": "PLACEHOLDER_PUBLIC_KEY_NETWORK_MAINTENANCE",
+        "allocation": {
+          "amount": "358390000000000000000000000",
+          "amount_readable": "358,390,000 FVC",
+          "percentage": "9.95%",
+          "wei_amount": "358390000000000000000000000"
+        },
+        "purpose": "Pemeliharaan infrastruktur jaringan blockchain, server maintenance, security audits, monitoring systems, dan pengembangan teknis",
+        "permissions": [
+          "infrastructure_maintenance",
+          "security_audit_funding",
+          "monitoring_system_operations",
+          "technical_development",
+          "emergency_network_repairs"
+        ],
+        "security": {
+          "multisig": true,
+          "required_signatures": 2,
+          "backup_keys": 3,
+          "cold_storage": true,
+          "automated_collection": true,
+          "audit_trail": true,
+          "real_time_monitoring": true
+        },
+        "funding_sources": {
+          "initial_allocation": "358,390,000 FVC from genesis",
+          "ongoing_funding": "10% of transaction fees from Genesis FVC",
+          "funding_frequency": "per_block automatic transfer",
+          "minimum_transfer_threshold": "100 FVC"
+        },
+        "usage_categories": {
+          "infrastructure": "40% - Server hosting, bandwidth, hardware",
+          "security": "30% - Security audits, penetration testing, monitoring",
+          "development": "20% - Technical improvements, bug fixes, optimizations",
+          "emergency_fund": "10% - Emergency network repairs and incidents"
+        }
+      }
+    },
+    "total_verification": {
+      "total_supply": "3600900000000000000000000000",
+      "total_allocated": "3600900000000000000000000000",
+      "remaining": "0",
+      "verification_status": "VERIFIED - All tokens allocated",
+      "breakdown": {
+        "owner_wallet": "9000000000000000000000000",
+        "developer_wallet": "8000000000000000000000000",
+        "transaction_fee_pool_wallet": "3225510000000000000000000000",
+        "network_maintenance_fund_wallet": "358390000000000000000000000"
+      }
+    },
+    "security_notes": {
+      "key_generation": "All private keys must be generated using cryptographically secure random number generators",
+      "storage": "Private keys should be stored in hardware security modules (HSM) or cold storage",
+      "backup": "Multiple encrypted backups should be created and stored in geographically distributed locations",
+      "access_control": "Implement strict access controls and audit logging for all wallet operations",
+      "monitoring": "Set up real-time monitoring and alerting for all wallet activities"
+    },
+    "operational_procedures": {
+      "key_ceremony": "Conduct secure key generation ceremony with multiple witnesses",
+      "multisig_setup": "Configure multisignature wallets with appropriate threshold requirements",
+      "testing": "Thoroughly test all wallet operations on testnet before mainnet deployment",
+      "documentation": "Maintain detailed documentation of all wallet configurations and procedures",
+      "regular_audits": "Conduct regular security audits of wallet infrastructure and procedures"
+    }
+  }
+}

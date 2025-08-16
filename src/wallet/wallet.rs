@@ -107,7 +107,7 @@ impl Wallet {
         
         let tx_data = format!("{}{}{}{}", 
             transaction.from, transaction.to, transaction.amount, transaction.nonce);
-        let signature = self.key_manager.sign(tx_data.as_bytes());
+        let signature = self.key_manager.sign(tx_data.as_bytes())?;
         
         transaction.sign(signature);
         
@@ -125,7 +125,7 @@ impl Wallet {
         
         let tx_data = format!("{}{}{}{}", 
             transaction.from, transaction.to, transaction.amount, transaction.nonce);
-        let signature = self.key_manager.sign(tx_data.as_bytes());
+        let signature = self.key_manager.sign(tx_data.as_bytes())?;
         
         transaction.sign(signature);
         
@@ -143,7 +143,7 @@ impl Wallet {
         
         let tx_data = format!("{}{}{}{}", 
             transaction.from, transaction.to, transaction.amount, transaction.nonce);
-        let signature = self.key_manager.sign(tx_data.as_bytes());
+        let signature = self.key_manager.sign(tx_data.as_bytes())?;
         
         transaction.sign(signature);
         

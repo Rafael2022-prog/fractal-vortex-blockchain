@@ -1,0 +1,31 @@
+﻿[Unit]
+Description=Fractal Vortex Chain Mainnet Node
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=fvc
+Group=fvc
+WorkingDirectory=/opt/fvc
+EnvironmentFile=/opt/fvc/mainnet.env
+ExecStart=/opt/fvc/fvc-mainnet
+Restart=always
+RestartSec=10
+KillMode=process
+TimeoutSec=300
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/fvc
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fvc-mainnet
+
+[Install]
+WantedBy=multi-user.target

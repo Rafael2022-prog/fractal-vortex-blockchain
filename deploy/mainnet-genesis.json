@@ -1,0 +1,130 @@
+{
+  "config": {
+    "chainId": 369,
+    "networkName": "FVChain Mainnet",
+    "version": "1.0.0",
+    "consensus": "FractalVortex",
+    "blockTime": 5,
+    "difficulty": {
+      "initial": 1000000,
+      "adjustmentInterval": 2016,
+      "targetBlockTime": 5
+    },
+    "supply": {
+      "total": "3600900000000000000000000000",
+      "decimals": 18,
+      "isFixed": true,
+      "description": "Fixed supply of 3,600,900,000 FVC tokens"
+    },
+    "mining": {
+      "algorithm": "FractalVortex",
+      "blockReward": "0",
+      "halvingInterval": 0,
+      "description": "No mining rewards - fixed supply distribution"
+    }
+  },
+  "timestamp": "2025-01-01T00:00:00Z",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "FVChain Mainnet Genesis Block - Fractal Vortex Consensus",
+  "gasLimit": "0x1c9c380",
+  "difficulty": "0xf4240",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "0x1111111111111111111111111111111111111111": {
+      "balance": "9000000000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Owner Wallet - 9,000,000 FVC (0.25% of total supply)",
+      "role": "owner"
+    },
+    "0x2222222222222222222222222222222222222222": {
+      "balance": "8000000000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Developer Wallet - 8,000,000 FVC (0.22% of total supply)",
+      "role": "developer"
+    },
+    "0x3333333333333333333333333333333333333333": {
+      "balance": "3583900000000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Genesis FVC - 3,583,900,000 FVC (99.53% of total supply)",
+      "role": "transaction_fee_pool"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "validators": [
+    {
+      "address": "0x1111111111111111111111111111111111111111",
+      "stake": "1000000000000000000000000",
+      "publicKey": "0x04...",
+      "description": "Genesis Validator - Owner"
+    }
+  ],
+  "ecosystem": {
+    "wallets": {
+      "owner": {
+        "address": "0x1111111111111111111111111111111111111111",
+        "allocation": "9000000000000000000000000",
+        "percentage": "0.25%",
+        "purpose": "Network governance and initial operations"
+      },
+      "developer": {
+        "address": "0x2222222222222222222222222222222222222222",
+        "allocation": "8000000000000000000000000",
+        "percentage": "0.22%",
+        "purpose": "Development fund and ecosystem growth"
+      },
+      "transaction_fee_pool": {
+        "address": "0x3333333333333333333333333333333333333333",
+        "allocation": "3583900000000000000000000000",
+        "percentage": "99.53%",
+        "purpose": "Menampung biaya transaksi dari user (transfer FVC, smart contract execution) dan mendistribusikan ke miners/validators"
+      }
+    },
+    "distribution": {
+      "total_allocated": "3600900000000000000000000000",
+      "remaining": "0",
+      "verification": "All tokens allocated at genesis - no future minting"
+    }
+  },
+  "security": {
+    "fractalVortex": {
+      "enabled": true,
+      "parameters": {
+        "vortexDepth": 8,
+        "fractalComplexity": 256,
+        "consensusThreshold": 0.67
+      }
+    },
+    "anomalyDetection": {
+      "enabled": true,
+      "sensitivity": "high"
+    }
+  },
+  "network": {
+    "torusTopology": {
+      "enabled": true,
+      "dimensions": 3,
+      "nodeConnectivity": 6
+    },
+    "p2p": {
+      "maxPeers": 50,
+      "bootNodes": [
+        "enode://..."
+      ]
+    }
+  },
+  "metadata": {
+    "created": "2025-01-12T23:45:00Z",
+    "creator": "FVChain Development Team",
+    "description": "FVChain Mainnet Genesis Block with fixed supply and ecosystem allocation",
+    "version": "1.0.0-mainnet",
+    "checksum": "sha256:..."
+  }
+}

@@ -120,9 +120,9 @@ impl FractalHasher {
         }
         
         // Generate 6-step vortex pattern
-        let vortex_base = [1, 2, 4, 8, 7, 5];
+        let vortex_base: [u8; 6] = [1, 2, 4, 8, 7, 5];
         for (i, &base) in vortex_base.iter().enumerate() {
-            let transformed = ((base + seed) * (i as u8 + 1)) % 9;
+            let transformed = ((base.wrapping_add(seed)).wrapping_mul(i as u8 + 1)) % 9;
             pattern.push(transformed);
         }
         

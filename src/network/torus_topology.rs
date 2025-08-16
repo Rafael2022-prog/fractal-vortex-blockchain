@@ -101,8 +101,8 @@ impl TorusNetwork {
         let delta_theta = (a.theta - b.theta).abs();
         
         // Wrap around torus
-        let delta_phi = delta_phi.min(2.0 * std::f64::consts::PI - delta_phi);
-        let delta_theta = delta_theta.min(2.0 * std::f64::consts::PI - delta_theta);
+        let _delta_phi = delta_phi.min(2.0 * std::f64::consts::PI - delta_phi);
+        let _delta_theta = delta_theta.min(2.0 * std::f64::consts::PI - delta_theta);
         
         // Euclidean distance in 3D torus space
         let x1 = (a.radius + 1.0) * a.phi.cos() * a.theta.cos();
@@ -123,6 +123,17 @@ impl TorusNetwork {
             // Use fractal dimension for diameter calculation
             self.diameter = (node_count as f64).log(2.0).ceil() as u32;
         }
+    }
+
+    /// Get current network diameter
+    pub fn get_diameter(&self) -> u32 {
+        self.diameter
+    }
+
+    /// Update network state
+    pub async fn update_network_state(&mut self) -> Result<(), NetworkError> {
+        self.update_network_diameter();
+        Ok(())
     }
 
     /// Generate vortex routing table
@@ -270,6 +281,17 @@ pub struct NetworkStats {
     pub fractal_dimension: f64,
 }
 
+/// Network errors
+#[derive(Debug, thiserror::Error)]
+pub enum NetworkError {
+    #[error("Node not found")]
+    NodeNotFound,
+    #[error("Invalid coordinate")]
+    InvalidCoordinate,
+    #[error("Network topology error")]
+    TopologyError,
+}
+
 impl TorusNetwork {
     pub fn get_stats(&self) -> NetworkStats {
         let node_count = self.node_positions.len();
@@ -278,7 +300,7 @@ impl TorusNetwork {
         
         let routing = self.generate_vortex_routing();
         
-        for (_, &coord) in &self.node_positions {
+        for (_, &_coord) in &self.node_positions {
             let energy = routing.energy_map.values().sum::<f64>();
             total_energy += energy;
             

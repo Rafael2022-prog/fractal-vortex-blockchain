@@ -1,0 +1,53 @@
+[Unit]
+Description=Fractal Vortex Chain Mainnet Node
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=fvchain
+Group=fvchain
+WorkingDirectory=/opt/fvchain
+# EnvironmentFile=/opt/fvchain/mainnet.env
+ExecStart=/opt/fvchain/target/release/fvc-node mainnet
+Restart=always
+RestartSec=10
+KillMode=process
+TimeoutSec=300
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/fvchain
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictNamespaces=true
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+
+# Device isolation settings
+PrivateDevices=true
+ProtectKernelLogs=true
+DevicePolicy=closed
+DeviceAllow=/dev/null rw
+DeviceAllow=/dev/zero rw
+DeviceAllow=/dev/urandom r
+
+# Network isolation settings
+PrivateNetwork=false
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=fvc-mainnet
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FVChain Wallet Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .warning { color: #fbbf24; }
+        .code {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        button {
+            background: #4f46e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 FVChain Wallet Diagnostic Tool</h1>
+        <p>Alat bantu untuk troubleshoot masalah PIN di device baru</p>
+
+        <div class="section">
+            <h2>📊 Browser Compatibility Check</h2>
+            <div id="browser-check"></div>
+        </div>
+
+        <div class="section">
+            <h2>🆔 Device Information</h2>
+            <div id="device-info"></div>
+        </div>
+
+        <div class="section">
+            <h2>🔐 PIN Status</h2>
+            <div id="pin-status"></div>
+        </div>
+
+        <div class="section">
+            <h2>🗄️ LocalStorage Check</h2>
+            <div id="storage-info"></div>
+        </div>
+
+        <div class="section">
+            <h2>🚨 Error Detection</h2>
+            <div id="error-detection"></div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Quick Actions</h2>
+            <button onclick="clearLocalStorage()">Clear Local Storage</button>
+            <button onclick="generateNewDeviceId()">Generate New Device ID</button>
+            <button onclick="refreshPage()">Refresh Page</button>
+        </div>
+
+        <div class="section">
+            <h2>📋 Recovery Steps</h2>
+            <div id="recovery-steps"></div>
+        </div>
+    </div>
+
+    <script>
+        function runDiagnostic() {
+            // Browser compatibility
+            const browserCheck = document.getElementById('browser-check');
+            const checks = [
+                { name: 'localStorage', test: typeof localStorage !== 'undefined' },
+                { name: 'crypto', test: typeof crypto !== 'undefined' },
+                { name: 'crypto.subtle', test: typeof crypto.subtle !== 'undefined' },
+                { name: 'sessionStorage', test: typeof sessionStorage !== 'undefined' }
+            ];
+
+            let browserHtml = '';
+            checks.forEach(check => {
+                const status = check.test ? '<span class="success">✅</span>' : '<span class="error">❌</span>';
+                browserHtml += `${status} ${check.name}<br>`;
+            });
+            browserCheck.innerHTML = browserHtml;
+
+            // Device information
+            const deviceInfo = document.getElementById('device-info');
+            const deviceId = localStorage.getItem('fvchain_device_id');
+            const timestamp = localStorage.getItem('wallet_pin_created_' + deviceId);
+            
+            let deviceHtml = '';
+            if (deviceId) {
+                deviceHtml = `
+                    <strong>Device ID:</strong> <span class="code">${deviceId}</span><br>
+                    <strong>Created:</strong> ${timestamp ? new Date(parseInt(timestamp)).toLocaleString() : 'Unknown'}
+                `;
+            } else {
+                deviceHtml = '<span class="warning">⚠️ Device ID belum di-generate</span>';
+            }
+            deviceInfo.innerHTML = deviceHtml;
+
+            // PIN status
+            const pinStatus = document.getElementById('pin-status');
+            const pinHash = localStorage.getItem('wallet_pin_' + deviceId);
+            const attempts = localStorage.getItem('wallet_attempts_' + deviceId);
+            const lockout = localStorage.getItem('wallet_lockout_' + deviceId);
+
+            let pinHtml = '';
+            if (pinHash) {
+                pinHtml = '<span class="success">✅ PIN sudah dibuat untuk device ini</span>';
+            } else {
+                pinHtml = '<span class="warning">⚠️ PIN belum dibuat untuk device ini</span>';
+            }
+            
+            if (attempts) {
+                pinHtml += `<br><span class="error">❌ Failed attempts: ${attempts}/5</span>`;
+            }
+            
+            if (lockout) {
+                const lockoutTime = new Date(parseInt(lockout));
+                const now = new Date();
+                if (now < lockoutTime) {
+                    const remaining = Math.ceil((lockoutTime - now) / 1000);
+                    pinHtml += `<br><span class="error">🔒 Wallet terkunci: ${remaining} detik tersisa</span>`;
+                }
+            }
+            pinStatus.innerHTML = pinHtml;
+
+            // Storage info
+            const storageInfo = document.getElementById('storage-info');
+            let storageHtml = '<strong>LocalStorage Items:</strong><br>';
+            let itemCount = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.includes('wallet') || key.includes('fvchain')) {
+                    storageHtml += `<span class="code">${key}: ${localStorage.getItem(key)?.substring(0, 20)}...</span><br>`;
+                    itemCount++;
+                }
+            }
+            if (itemCount === 0) {
+                storageHtml += '<span class="warning">Tidak ada data wallet ditemukan</span>';
+            }
+            storageInfo.innerHTML = storageHtml;
+
+            // Error detection
+            const errorDetection = document.getElementById('error-detection');
+            let errorHtml = '';
+            
+            if (!deviceId) {
+                errorHtml += '<span class="error">❌ Device ID tidak ditemukan</span><br>';
+            }
+            
+            if (!pinHash && !deviceId) {
+                errorHtml += '<span class="warning">⚠️ Ini device baru, setup PIN diperlukan</span><br>';
+            }
+            
+            if (lockout) {
+                errorHtml += '<span class="error">🔒 Device terkunci karena terlalu banyak percobaan gagal</span><br>';
+            }
+
+            if (errorHtml === '') {
+                errorHtml = '<span class="success">✅ Tidak ada error terdeteksi</span>';
+            }
+            errorDetection.innerHTML = errorHtml;
+
+            // Recovery steps
+            const recoverySteps = document.getElementById('recovery-steps');
+            let recoveryHtml = '';
+            
+            if (!pinHash) {
+                recoveryHtml = `
+                    <ol>
+                        <li><strong>Setup PIN baru</strong> untuk device ini</li>
+                        <li><strong>Ambil private key</strong> dari device lama</li>
+                        <li><strong>Import wallet</strong> dengan private key</li>
+                        <li><strong>Verifikasi</strong> address dan saldo</li>
+                    </ol>
+                    <button onclick="window.open('/dashboard', '_blank')">Buka Dashboard</button>
+                `;
+            } else {
+                recoveryHtml = '<span class="success">✅ Wallet sudah setup di device ini</span>';
+            }
+            recoverySteps.innerHTML = recoveryHtml;
+        }
+
+        function clearLocalStorage() {
+            if (confirm('Yakin ingin menghapus semua data wallet di device ini?')) {
+                localStorage.clear();
+                alert('LocalStorage dihapus. Refresh halaman untuk mulai baru.');
+                runDiagnostic();
+            }
+        }
+
+        function generateNewDeviceId() {
+            const newId = 'device_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('fvchain_device_id', newId);
+            alert('Device ID baru di-generate: ' + newId);
+            runDiagnostic();
+        }
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        // Run diagnostic on page load
+        runDiagnostic();
+    </script>
+</body>
+</html>

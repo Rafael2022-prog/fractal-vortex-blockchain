@@ -1,0 +1,164 @@
+# Fractal-Vortex Security Configuration
+# Production-ready security settings for mainnet deployment
+
+[security.audit]
+# NIST Statistical Test Configuration
+confidence_level = 0.95
+sample_size = 1000
+minimum_pass_rate = 0.95
+
+# Test thresholds
+frequency_test_threshold = 0.01
+runs_test_threshold = 0.01
+chi_square_threshold = 0.01
+ks_test_threshold = 0.01
+serial_test_threshold = 0.01
+
+[security.verification]
+# TLA+ Verification Settings
+tla_timeout = 300  # seconds
+tla_workers = 4
+tla_memory_limit = "8GB"
+
+# Coq Proof Settings
+coq_timeout = 600  # seconds
+coq_memory_limit = "16GB"
+coq_workers = 2
+
+[security.chaos]
+# Chaos Testing Configuration
+max_iterations = 1000
+convergence_threshold = 0.001
+perturbation_strength = 0.1
+
+# Fractal property tolerances
+self_similarity_tolerance = 0.05
+fractal_dimension_tolerance = 0.02
+vortex_pattern_tolerance = 0.03
+energy_conservation_tolerance = 0.01
+
+[security.monitoring]
+# Real-time Monitoring Settings
+monitoring_interval = 30  # seconds
+alert_cooldown = 300  # seconds
+log_retention_days = 30
+
+# Health check thresholds
+node_health_threshold = 0.8
+response_time_threshold = 1000  # milliseconds
+connection_health_threshold = 0.9
+
+# Fractal topology monitoring
+topology_analysis_interval = 60  # seconds
+clustering_coefficient_threshold = 0.7
+path_length_threshold = 3.0
+
+[security.anomaly]
+# Anomaly Detection Configuration
+isolation_forest_contamination = 0.1
+lstm_sequence_length = 50
+lstm_hidden_size = 128
+lstm_epochs = 100
+
+# Attack detection thresholds
+sybil_cluster_threshold = 10
+eclipse_detection_timeout = 300  # seconds
+replay_attack_threshold = 0.8
+energy_manipulation_threshold = 0.3
+
+# Z-score thresholds for statistical anomalies
+z_score_threshold = 2.5
+entropy_threshold = 0.8
+correlation_threshold = 0.9
+
+[security.logging]
+# Security Logging Configuration
+log_level = "info"
+security_log_path = "logs/security.log"
+alert_log_path = "logs/alerts.log"
+audit_log_path = "logs/audit.log"
+
+# Log rotation settings
+max_log_size = "100MB"
+max_log_files = 10
+compress_old_logs = true
+
+[security.network]
+# Network Security Settings
+max_connections_per_node = 100
+connection_timeout = 30  # seconds
+heartbeat_interval = 60  # seconds
+
+# Rate limiting
+max_requests_per_second = 100
+burst_limit = 1000
+rate_limit_window = 60  # seconds
+
+[security.crypto]
+# Cryptographic Security Settings
+key_rotation_interval = 86400  # seconds (24 hours)
+signature_algorithm = "ed25519"
+hash_algorithm = "blake3"
+
+# Quantum-resistant settings
+quantum_safe_mode = false  # Enable for post-quantum cryptography
+quantum_key_size = 256
+
+[security.deployment]
+# Production Deployment Settings
+require_audit_pass = true
+require_verification_pass = true
+require_chaos_test_pass = true
+
+# Security checklist
+run_pre_deployment_audit = true
+run_post_deployment_verification = true
+enable_continuous_monitoring = true
+enable_anomaly_detection = true
+
+[security.alerts]
+# Alert Configuration
+email_alerts = true
+webhook_alerts = true
+slack_alerts = false
+telegram_alerts = false
+
+# Alert recipients
+security_team_email = "security@fractal-vortex.com"
+incident_webhook_url = "https://alerts.fractal-vortex.com/webhook"
+
+# Alert severity levels
+critical_alerts = ["sybil_attack", "eclipse_attack", "consensus_failure"]
+warning_alerts = ["high_latency", "low_entropy", "energy_anomaly"]
+info_alerts = ["node_join", "node_leave", "audit_complete"]
+
+[security.backup]
+# Security Data Backup
+backup_audit_logs = true
+backup_verification_proofs = true
+backup_chaos_reports = true
+backup_retention_days = 90
+
+[security.performance]
+# Performance vs Security Trade-offs
+enable_parallel_verification = true
+enable_caching = true
+cache_size = "1GB"
+
+# Resource limits
+max_cpu_usage = 0.8  # 80%
+max_memory_usage = 0.8  # 80%
+max_disk_usage = 0.9  # 90%
+
+[security.testnet]
+# Testnet-specific settings
+relaxed_thresholds = true
+enable_debug_mode = true
+mock_verification = false
+
+[security.mainnet]
+# Mainnet-specific settings
+strict_thresholds = true
+disable_debug_mode = true
+require_full_verification = true
+enable_all_security_checks = true

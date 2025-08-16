@@ -1,0 +1,130 @@
+{
+  "config": {
+    "chainId": 369,
+    "networkName": "FVChain Mainnet",
+    "version": "1.0.0",
+    "consensus": "FractalVortex",
+    "blockTime": 5,
+    "difficulty": {
+      "initial": 1000000,
+      "adjustmentInterval": 2016,
+      "targetBlockTime": 5
+    },
+    "supply": {
+      "total": "3600900000000000000",
+      "decimals": 9,
+      "isFixed": true,
+      "description": "Fixed supply of 3,600,900,000 FVC tokens"
+    },
+    "mining": {
+      "algorithm": "FractalVortex",
+      "blockReward": "0",
+      "halvingInterval": 0,
+      "description": "No mining rewards - fixed supply distribution"
+    }
+  },
+  "timestamp": "2025-01-13T12:00:00Z",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "FVChain Mainnet Genesis Block - Fractal Vortex Consensus",
+  "gasLimit": "0x1c9c380",
+  "difficulty": "0xf4240",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "fvca65abb1219e9ac3548947be65eae19843f3faa40": {
+      "balance": "9000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Owner Wallet - 9,000,000 FVC (0.25% of total supply)",
+      "role": "owner"
+    },
+    "fvc041f666a316648dec225badc5c5993b53ac3f2fd": {
+      "balance": "8000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Developer Wallet - 8,000,000 FVC (0.22% of total supply)",
+      "role": "developer"
+    },
+    "fvccf6bbe570677e98248030a6289957d5a88a551dc": {
+      "balance": "3583900000000000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Genesis FVC - 3,583,900,000 FVC (99.53% of total supply)",
+      "role": "transaction_fee_pool"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "validators": [
+    {
+      "address": "fvca65abb1219e9ac3548947be65eae19843f3faa40",
+      "stake": "1000000000000000000",
+      "publicKey": "0445bd452391acb4cd88ef8cce7d0fdab1ba258a21738b88b0255f32525c8835e33778e6284348c723fafacbe826bef873160adce0a626976b4117dfad68060a",
+      "description": "Genesis Validator - Owner"
+    }
+  ],
+  "ecosystem": {
+    "wallets": {
+      "owner": {
+        "address": "fvca65abb1219e9ac3548947be65eae19843f3faa40",
+        "allocation": "9000000000000000000",
+        "percentage": "0.25%",
+        "purpose": "Network governance and initial operations"
+      },
+      "developer": {
+        "address": "fvc041f666a316648dec225badc5c5993b53ac3f2fd",
+        "allocation": "8000000000000000000",
+        "percentage": "0.22%",
+        "purpose": "Development fund and ecosystem growth"
+      },
+      "transaction_fee_pool": {
+        "address": "fvccf6bbe570677e98248030a6289957d5a88a551dc",
+        "allocation": "3583900000000000000000000",
+        "percentage": "99.53%",
+        "purpose": "Menampung biaya transaksi dari user (transfer FVC, smart contract execution) dan mendistribusikan ke miners/validators"
+      }
+    },
+    "distribution": {
+      "total_allocated": "3600900000000000000",
+      "remaining": "0",
+      "verification": "All tokens allocated at genesis - no future minting"
+    }
+  },
+  "security": {
+    "fractalVortex": {
+      "enabled": true,
+      "parameters": {
+        "vortexDepth": 8,
+        "fractalComplexity": 256,
+        "consensusThreshold": 0.67
+      }
+    },
+    "anomalyDetection": {
+      "enabled": true,
+      "sensitivity": "high"
+    }
+  },
+  "network": {
+    "torusTopology": {
+      "enabled": true,
+      "dimensions": 3,
+      "nodeConnectivity": 6
+    },
+    "p2p": {
+      "maxPeers": 50,
+      "bootNodes": [
+        "enode://..."
+      ]
+    }
+  },
+  "metadata": {
+    "created": "2025-01-13T12:00:00Z",
+    "creator": "FVChain Development Team",
+    "description": "FVChain Mainnet Genesis Block - RESET 2025-01-13 - Fixed supply and ecosystem allocation preserved",
+    "version": "1.0.0-mainnet",
+    "checksum": "sha256:..."
+  }
+}

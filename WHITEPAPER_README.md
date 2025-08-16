@@ -82,11 +82,11 @@ The whitepapers document the **current implemented features** of the FVC blockch
 
 ### FVC Token
 - **Symbol:** FVC
-- **Total Supply:** 21,000,000 FVC
+- **Total Supply:** 3,600,900,000 FVC (3.6 billion)
 - **Decimals:** 18
 - **Consensus:** Vortex Proof-of-Work (vPoW)
-- **Block Time:** ~5 seconds
-- **Halving:** Every 210,000 blocks
+- **Block Time:** 5 seconds
+- **Halving:** Every 12,614,400 blocks (2 years)
 
 ### Network Parameters
 - **Genesis Block:** Implemented

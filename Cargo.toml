@@ -11,6 +11,8 @@ repository = "https://github.com/fractalvortex/fvc-protocol"
 name = "fvc-node"
 path = "src/main.rs"
 
+
+
 [dependencies]
 # Core dependencies
 serde = { version = "1.0", features = ["derive"] }
@@ -21,11 +23,12 @@ tokio = { version = "1.0", features = ["full"] }
 clap = { version = "4.0", features = ["derive"] }
 
 # P2P networking
-libp2p = { version = "0.54", features = ["tcp", "noise", "yamux", "gossipsub", "kad", "request-response"] }
+libp2p = { version = "0.54", features = ["tcp", "tokio", "noise", "yamux", "gossipsub", "kad", "request-response"] }
 
 # Basic cryptography
 sha3 = "0.10"
 blake3 = "1.5"
+secp256k1 = "0.28"
 
 # WebSocket & async utilities
 tokio-tungstenite = "0.21"
@@ -42,13 +45,16 @@ bs58 = "0.5"
 env_logger = "0.10"
 log = "0.4"
 
+# Async trait support
+async-trait = "0.1"
+
 # Mnemonic support
 bip39 = "2.0"
 
 # Additional dependencies
 rand = "0.8"
 thiserror = "1.0"
-axum = "0.7"
+axum = { version = "0.7", features = ["macros"] }
 # Added tower-http for CORS support
 tower-http = { version = "0.5", features = ["cors"] }
 
@@ -67,6 +73,10 @@ ndarray = "0.15"
 ndarray-rand = "0.14"
 toml = "0.8"
 
+# Mathematical computation dependencies
+num-bigint = "0.4"
+num-complex = "0.4"
+
 [[bin]]
 name = "fvc-wallet"
 path = "src/bin/wallet-cli.rs"
@@ -77,3 +87,13 @@ path = "src/bin/rpc-server.rs"
 
 [dev-dependencies]
 tempfile = "3.0"
+secp256k1 = "0.28"
+
+
+
+
+
+
+
+
+

@@ -1,57 +1,151 @@
 {
-  "name": "mainnet-genesis",
-  "chain_id": "fractal-vortex-mainnet",
-  "initial_supply": 21000000000000000000000000,
+  "config": {
+    "chainId": 369,
+    "networkName": "FVChain Mainnet",
+    "version": "2.0.1",
+    "consensus": "FractalVortex",
+    "blockTime": 5,
+    "difficulty": {
+      "initial": 10,
+      "adjustmentInterval": 2023,
+      "targetBlockTime": 5,
+      "algorithm": "bitcoin_adjustment"
+    },
+    "supply": {
+      "total": "3600900000000000000",
+      "decimals": 9,
+      "isFixed": true,
+      "description": "Fixed supply of 3,600,900,000 FVC tokens with mining allocation"
+    },
+    "mining": {
+      "algorithm": "FractalVortex",
+      "blockReward": "6250000000",
+      "halvingInterval": 12614400,
+      "description": "Bitcoin-style mining with 6.25 FVC reward, halving every 2 years",
+      "enabled": true
+    }
+  },
+  "timestamp": "2025-08-09T00:00:00Z",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "extraData": "FVChain Mainnet Genesis Block - Fractal Vortex Consensus with Mining",
+  "gasLimit": "0x1c9c380",
+  "difficulty": "0xa",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "0x1111111111111111111111111111111111111111": {
+      "balance": "540135000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Owner Wallet - 540,135,000 FVC (15% of total supply)",
+      "role": "owner"
+    },
+    "0x2222222222222222222222222222222222222222": {
+      "balance": "360090000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Developer Wallet - 360,090,000 FVC (10% of total supply)",
+      "role": "developer"
+    },
+    "0x3333333333333333333333333333333333333333": {
+      "balance": "360090000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Ecosystem Maintenance Wallet - 360,090,000 FVC (10% of total supply)",
+      "role": "ecosystem_maintenance"
+    },
+    "0x4444444444444444444444444444444444444444": {
+      "balance": "2340585000000000000",
+      "code": "",
+      "storage": {},
+      "nonce": "0x0",
+      "description": "Mining Rewards Pool - 2,340,585,000 FVC (65% of total supply for mining)",
+      "role": "mining_rewards"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
   "validators": [
     {
-      "id": "validator-mainnet-00",
-      "address": "0x1000000000000000000000000000000000000000",
-      "stake": 5250000000000000000000000,
-      "fractal_energy": 1.618
-    },
-    {
-      "id": "validator-mainnet-01",
-      "address": "0x1000000000000000000000000000000000000001",
-      "stake": 5250000000000000000000000,
-      "fractal_energy": 1.7180000000000002
-    },
-    {
-      "id": "validator-mainnet-02",
-      "address": "0x1000000000000000000000000000000000000002",
-      "stake": 5250000000000000000000000,
-      "fractal_energy": 1.818
-    },
-    {
-      "id": "validator-mainnet-03",
-      "address": "0x1000000000000000000000000000000000000003",
-      "stake": 5250000000000000000000000,
-      "fractal_energy": 1.9180000000000001
+      "address": "0x1111111111111111111111111111111111111111",
+      "stake": "1000000000000000000",
+      "publicKey": "0x04...",
+      "description": "Genesis Validator - Owner"
     }
   ],
-  "genesis_time": 1735045200,
-  "fractal_parameters": {
-    "energy_threshold": 2.0,
-    "fractal_levels": 5,
-    "vortex_sequence": [
-      1,
-      2,
-      4,
-      8,
-      7,
-      5
-    ],
-    "golden_ratio": 1.618033988749895,
-    "difficulty_adjustment": 2016,
-    "block_time_target": 600,
-    "max_block_size": 8388608,
-    "halving_interval": 210000
+  "ecosystem": {
+    "wallets": {
+      "owner": {
+        "address": "0x1111111111111111111111111111111111111111",
+        "allocation": "540135000000000000",
+        "percentage": "15%",
+        "purpose": "Network governance and initial operations",
+        "paid": "100%"
+      },
+      "developer": {
+        "address": "0x2222222222222222222222222222222222222222",
+        "allocation": "360090000000000000",
+        "percentage": "10%",
+        "purpose": "Development fund and ecosystem growth",
+        "paid": "100%"
+      },
+      "ecosystem_maintenance": {
+        "address": "0x3333333333333333333333333333333333333333",
+        "allocation": "360090000000000000",
+        "percentage": "10%",
+        "purpose": "Ecosystem maintenance and operational costs",
+        "paid": "100%"
+      },
+      "mining_rewards": {
+        "address": "0x4444444444444444444444444444444444444444",
+        "allocation": "2340585000000000000",
+        "percentage": "65%",
+        "purpose": "Mining rewards distributed over time through proof-of-work",
+        "paid": "0%"
+      }
+    },
+    "distribution": {
+      "total_allocated": "3600900000000000000",
+      "mining_allocation": "2340585000000000000",
+      "immediate_allocation": "1260315000000000000",
+      "verification": "100% allocated at genesis - mining rewards distributed over 2+ years"
+    }
   },
-  "network_config": {
-    "p2p_port": 8333,
-    "rpc_port": 8332,
-    "max_peers": 125,
-    "seed_nodes": [
-      "103.245.38.44:8333"
-    ]
+  "security": {
+    "fractalVortex": {
+      "enabled": true,
+      "parameters": {
+        "vortexDepth": 8,
+        "fractalComplexity": 256,
+        "consensusThreshold": 0.67
+      }
+    },
+    "anomalyDetection": {
+      "enabled": true,
+      "sensitivity": "high"
+    }
+  },
+  "network": {
+    "torusTopology": {
+      "enabled": true,
+      "dimensions": 3,
+      "nodeConnectivity": 6
+    },
+    "p2p": {
+      "maxPeers": 50,
+      "bootNodes": [
+        "enode://..."
+      ]
+    }
+  },
+  "metadata": {
+    "created": "2025-01-12T23:45:00Z",
+    "creator": "FVChain Development Team",
+    "description": "FVChain Mainnet Genesis Block with Bitcoin-style mining and proper allocation - Updated with difficulty 10 and 2023-block adjustment",
+    "version": "2.0.1-mainnet",
+    "checksum": "sha256:..."
   }
 }
