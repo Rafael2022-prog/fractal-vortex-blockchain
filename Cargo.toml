@@ -1,0 +1,103 @@
+[package]
+name = "fractal-vortex-chain"
+version = "0.1.0"
+edition = "2021"
+description = "Revolutionary blockchain combining fractal self-similarity with vortex mathematics"
+authors = ["FVC Core Team"]
+license = "MIT"
+repository = "https://github.com/fractalvortex/fvc-protocol"
+
+[[bin]]
+name = "fvc-node"
+path = "src/main.rs"
+
+[[bin]]
+name = "test_address_generation"
+path = "test_address_generation.rs"
+
+[[bin]]
+name = "debug_step_by_step"
+path = "debug_step_by_step.rs"
+
+[[bin]]
+name = "debug_public_key"
+path = "debug_public_key.rs"
+
+[[bin]]
+name = "test_secp256k1_rust"
+path = "test_secp256k1_rust.rs"
+
+[[bin]]
+name = "debug_fractal_vortex_step_by_step"
+path = "debug_fractal_vortex_step_by_step.rs"
+
+[[bin]]
+name = "validate_wallet_data"
+path = "validate_wallet_data.rs"
+
+[[bin]]
+name = "debug_rust_output"
+path = "debug_rust_output.rs"
+
+
+
+[dependencies]
+# Core dependencies
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+axum = "0.7"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors"] }
+futures-util = "0.3"
+tokio-stream = { version = "0.1", features = ["sync"] }
+once_cell = "1.19"
+log = "0.4"
+env_logger = "0.11"
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+lazy_static = "1.4"
+regex = "1.10"
+rocksdb = "0.22"
+libp2p = { version = "0.53", features = ["tcp", "noise", "yamux", "gossipsub", "mdns", "kad", "identify", "ping", "macros", "tokio", "request-response"] }
+futures = "0.3"
+clap = { version = "4.0", features = ["derive"] }
+rpassword = "7.3"
+toml = "0.8"
+md5 = "0.7"
+sha3 = "0.10"
+uuid = { version = "1.0", features = ["v4"] }
+secp256k1 = "0.28"
+bip39 = "2.0"
+statrs = "0.16"
+reqwest = { version = "0.11", features = ["json"] }
+ndarray = "0.15"
+ndarray-rand = "0.14"
+leveldb = "0.8"
+blake3 = "1.5"
+argon2 = "0.5"
+thiserror = "1.0"
+anyhow = "1.0"
+tokio-tungstenite = "0.21"
+
+[[bin]]
+name = "fvc-wallet"
+path = "src/bin/wallet-cli.rs"
+
+[[bin]]
+name = "integrated-node-rpc-server"
+path = "src/bin/integrated-node-rpc-server.rs"
+
+[dev-dependencies]
+tempfile = "3.0"
+
+
+
+
+
+
+
+
+

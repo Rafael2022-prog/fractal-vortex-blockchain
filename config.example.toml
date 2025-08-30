@@ -1,0 +1,51 @@
+# FVChain Configuration Example
+# Copy this file to config.toml and update with your values
+
+[network]
+# RPC server configuration
+rpc_host = "0.0.0.0"
+rpc_port = 8080
+
+# Network settings
+chain_id = 369
+network_name = "fvchain_mainnet"
+
+# For testnet, use:
+# chain_id = 370
+# network_name = "fvchain_testnet"
+
+[mining]
+# Mining configuration
+difficulty_adjustment_interval = 2016
+target_block_time = 600  # 10 minutes
+max_block_size = 1048576  # 1MB
+
+[security]
+# Security settings
+max_connections = 100
+rate_limit_requests_per_minute = 60
+
+[storage]
+# Data storage paths
+blockchain_data_path = "./data/blockchain"
+state_data_path = "./data/state"
+rpc_storage_path = "./data/rpc_storage"
+
+[api]
+# API configuration
+api_key = "your_api_key_here"
+admin_key = "your_admin_key_here"
+session_timeout = 3600  # 1 hour
+
+[ssl]
+# SSL/TLS configuration (optional)
+enable_ssl = false
+cert_path = "/path/to/certificate.crt"
+key_path = "/path/to/private.key"
+
+[logging]
+# Logging configuration
+log_level = "info"
+log_file = "./logs/fvchain.log"
+max_log_size = "100MB"
+max_log_files = 10

@@ -1,0 +1,228 @@
+# Rust
+target/
+Cargo.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Private keys and certificates
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+
+# Configuration files with secrets
+config/secrets.toml
+secrets.toml
+*.secret
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts
+dist/
+build/
+release/
+
+# Blockchain data
+data/
+blockchain/
+state/
+rpc_storage/
+
+# Wallet files
+wallet.json
+*wallet*.json
+keystore/
+owner-wallet*.json
+developer-wallet.json
+ecosystem_wallets.json
+
+# Backup files
+*.backup
+*.bak
+backup_*/
+
+# SENSITIVE FILES - NEVER COMMIT
+# Server credentials and deployment scripts
+check-server.ps1
+cloud-deploy-update.sh
+deploy-*.ps1
+deploy-*.sh
+fix-*.ps1
+fix-*.sh
+restart-*.ps1
+rebuild-*.ps1
+verify-*.ps1
+diagnose-*.ps1
+monitor-*.sh
+recovery-*.sh
+server-*.sh
+temp_ssh.bat
+
+# Configuration files with IP addresses and secrets
+.env.cloud
+mainnet.env
+node-*.env
+security-config.toml
+
+# Scripts with credentials or sensitive operations
+create_test_devices.py
+check_*.ps1
+analyze_*.ps1
+transfer_*.ps1
+transfer_*.dart
+update_*.dart
+validate_*.rs
+debug_*.rs
+debug_*.dart
+
+# Deployment and service files
+*.service
+*.conf
+nginx*.conf
+fvc-*.conf
+fvchain-*.conf
+docker-compose.yml
+Dockerfile
+
+# Genesis and mainnet configuration
+genesis*.json
+mainnet-genesis.json
+
+# SSL certificates and keys
+ssl/
+certs/
+
+# Mobile app sensitive files
+dapp/mobile_*/
+
+# Desktop app builds and releases
+dapp/desktop/build/
+dapp/desktop/dist/
+dapp/desktop/release/
+dapp/desktop/*.msi
+dapp/desktop/*.exe
+dapp/desktop/*.dmg
+dapp/desktop/*.deb
+dapp/desktop/*.rpm
+
+# Large binary files (>100MB GitHub limit)
+*.zip
+*.exe
+*.msi
+*.dmg
+*.deb
+*.rpm
+*.tar.gz
+*.rar
+*.7z
+
+# Specific large files that exceed GitHub limits
+dapp/desktop/release/installer/
+dapp/desktop/release/win-unpacked/
+
+# Browser extension builds
+dapp/browser-extension/dist/
+dapp/browser-extension/build/
+
+# Dashboard builds
+dashboard/.next/
+dashboard/out/
+dashboard_new/
+root/
+
+# Logo exports and assets
+logo-exports/
+
+# Test and debug files
+tests/
+security-tests/
+examples/
+docs/
+
+# Specific sensitive files
+API_DOWNLOAD_IMPLEMENTATION.md
+CSP_FIX_DOCUMENTATION.md
+DASHBOARD_DATA_CONSISTENCY_FIX.md
+SSE_*.md
+MONITORING_GUIDE.md
+SECURITY_GUIDE.md
+INTEGRATED_NODE_FILES.md
+
+# PowerShell and batch scripts
+*.ps1
+*.bat
+*.sh
+
+# Dart and Flutter specific debug files
+pubspec.lock
+*.dart.js
+*.dart.js.map
+*.dart.js.deps
+*.dart.precompiled.js
+
+# Rust debug binaries
+debug_*
+count_*
+
+# Any file containing 'password', 'secret', 'key', 'token'
+*password*
+*secret*
+*token*
+*credential*
+
+# Specific deployment directories
+deployment/
+deploy/
